@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Акаунт — APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">❄️APEX<span>SETUP</span></a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="recommendations.html">Рекомендації</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section auth-page">
+    <div class="auth-card" id="auth-card">
+
+      <!-- 1. Вибір: реєстрація або вхід -->
+      <section id="view-choice">
+        <h1>Акаунт</h1>
+        <p class="muted">Увійдіть або створіть акаунт APEXSETUP.</p>
+        <div class="auth-actions">
+          <button type="button" class="btn btn-lg btn-block" data-go="register">Зареєструватись</button>
+          <button type="button" class="btn btn-lg btn-block btn-outline" data-go="login">Увійти по електронній пошті</button>
+        </div>
+      </section>
+
+      <!-- 2. Реєстрація -->
+      <section id="view-register" hidden>
+        <h2>Реєстрація</h2>
+        <p class="muted">Вкажіть нік, електронну адресу та пароль. Далі ми надішлемо код підтвердження.</p>
+        <form id="register-form" class="auth-form" novalidate>
+          <p class="form-error" id="reg-error" hidden></p>
+          <label>Нік
+            <input type="text" name="nick" maxlength="20" autocomplete="username">
+          </label>
+          <label>Електронна адреса
+            <input type="email" name="email" autocomplete="email">
+          </label>
+          <label>Пароль (мінімум 8 символів)
+            <div class="pass-wrap">
+              <input type="password" id="reg-password" name="password" autocomplete="new-password">
+              <button type="button" class="toggle-pass" data-target="reg-password" aria-label="Показати пароль">👁</button>
+            </div>
+          </label>
+          <button type="submit" class="btn btn-lg btn-block" id="reg-btn">Отримати код</button>
+          <p class="auth-switch">Вже є акаунт? <button type="button" class="link-btn" data-go="login">Увійти</button></p>
+          <p class="auth-switch"><button type="button" class="link-btn" data-go="choice">← Назад</button></p>
+        </form>
+      </section>
+
+      <!-- 3. Вхід -->
+      <section id="view-login" hidden>
+        <h2>Вхід</h2>
+        <p class="muted">Введіть електронну адресу та пароль. Далі ми надішлемо код підтвердження.</p>
+        <form id="login-form" class="auth-form" novalidate>
+          <p class="form-error" id="login-error" hidden></p>
+          <label>Електронна адреса
+            <input type="email" name="email" autocomplete="email">
+          </label>
+          <label>Пароль
+            <div class="pass-wrap">
+              <input type="password" id="login-password" name="password" autocomplete="current-password">
+              <button type="button" class="toggle-pass" data-target="login-password" aria-label="Показати пароль">👁</button>
+            </div>
+          </label>
+          <button type="submit" class="btn btn-lg btn-block" id="login-btn">Отримати код</button>
+          <p class="auth-switch">Немає акаунта? <button type="button" class="link-btn" data-go="register">Зареєструватись</button></p>
+          <p class="auth-switch"><button type="button" class="link-btn" data-go="choice">← Назад</button></p>
+        </form>
+      </section>
+
+      <!-- 4. Введення коду з пошти (для реєстрації, входу та змін в акаунті) -->
+      <section id="view-code" hidden>
+        <h2 id="code-title">Підтвердіть пошту</h2>
+        <p class="muted">Ми надіслали 6-значний код на <strong id="code-email"></strong>. Він дійсний 10 хвилин.</p>
+
+        <!-- Повідомлення про статус листа (демо-режим / тестовий режим) -->
+        <div class="demo-mail" id="demo-mail" hidden></div>
+
+        <form id="code-form" class="auth-form" novalidate>
+          <p class="form-error" id="code-error" hidden></p>
+          <input type="text" id="code-input" class="code-input" inputmode="numeric"
+                 autocomplete="one-time-code" maxlength="6" placeholder="••••••" aria-label="Код підтвердження">
+          <button type="submit" class="btn btn-lg btn-block" id="code-btn">Підтвердити</button>
+          <button type="button" class="btn btn-block btn-outline" id="resend-btn" disabled>Надіслати код ще раз</button>
+          <p class="auth-switch"><button type="button" class="link-btn" id="code-back">← Назад</button></p>
+        </form>
+      </section>
+
+      <!-- 5. Профіль (після входу) -->
+      <section id="view-profile" hidden class="profile">
+        <div class="profile-avatar" id="profile-avatar">A</div>
+        <h2 id="profile-nick">Нік</h2>
+        <p class="muted" id="profile-email">email</p>
+
+        <!-- Керування аватаром -->
+        <div class="avatar-actions">
+          <button type="button" class="btn btn-sm btn-outline" id="avatar-pick">📷 Завантажити фото</button>
+          <button type="button" class="btn btn-sm btn-outline" id="avatar-remove" hidden>Прибрати фото</button>
+          <input type="file" id="avatar-input" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+        </div>
+        <p class="form-error" id="profile-error" hidden></p>
+
+        <!-- Меню налаштувань (кнопку «Адмін-панель» додає js/admin-access.js, тільки для адміна) -->
+        <div class="settings-menu">
+          <button type="button" class="settings-item" data-go="nick"><span>✏️</span> Змінити нік</button>
+          <button type="button" class="settings-item" data-go="password"><span>🔒</span> Змінити пароль</button>
+          <button type="button" class="settings-item" data-go="email"><span>✉️</span> Змінити пошту</button>
+          <button type="button" class="settings-item danger" data-go="delete"><span>🗑</span> Видалити акаунт</button>
+        </div>
+
+        <div class="auth-actions">
+          <a href="catalog.html" class="btn btn-lg btn-block">Перейти до каталогу</a>
+          <button type="button" class="btn btn-lg btn-block btn-outline" id="logout-btn">Вийти з акаунта</button>
+        </div>
+      </section>
+
+      <!-- 6. Зміна ніка -->
+      <section id="view-nick" hidden>
+        <h2>Змінити нік</h2>
+        <p class="muted">Підтвердження кодом не потрібне.</p>
+        <form id="nick-form" class="auth-form" novalidate>
+          <p class="form-error" id="nick-error" hidden></p>
+          <label>Новий нік
+            <input type="text" name="nick" maxlength="20" autocomplete="username">
+          </label>
+          <button type="submit" class="btn btn-lg btn-block">Зберегти</button>
+          <p class="auth-switch"><button type="button" class="link-btn" data-go="profile">← Назад</button></p>
+        </form>
+      </section>
+
+      <!-- 7. Зміна пароля -->
+      <section id="view-password" hidden>
+        <h2>Змінити пароль</h2>
+        <p class="muted">Введіть поточний і новий пароль. Далі ми надішлемо код підтвердження.</p>
+        <form id="password-form" class="auth-form" novalidate>
+          <p class="form-error" id="password-error" hidden></p>
+          <label>Поточний пароль
+            <div class="pass-wrap">
+              <input type="password" id="pw-current" name="current" autocomplete="current-password">
+              <button type="button" class="toggle-pass" data-target="pw-current" aria-label="Показати пароль">👁</button>
+            </div>
+          </label>
+          <label>Новий пароль (мінімум 8 символів)
+            <div class="pass-wrap">
+              <input type="password" id="pw-new" name="next" autocomplete="new-password">
+              <button type="button" class="toggle-pass" data-target="pw-new" aria-label="Показати пароль">👁</button>
+            </div>
+          </label>
+          <label>Повторіть новий пароль
+            <div class="pass-wrap">
+              <input type="password" id="pw-repeat" name="repeat" autocomplete="new-password">
+              <button type="button" class="toggle-pass" data-target="pw-repeat" aria-label="Показати пароль">👁</button>
+            </div>
+          </label>
+          <button type="submit" class="btn btn-lg btn-block" id="password-btn">Отримати код</button>
+          <p class="auth-switch"><button type="button" class="link-btn" data-go="profile">← Назад</button></p>
+        </form>
+      </section>
+
+      <!-- 8. Зміна пошти -->
+      <section id="view-email" hidden>
+        <h2>Змінити пошту</h2>
+        <p class="muted">Код підтвердження буде надіслано на нову адресу.</p>
+        <form id="email-form" class="auth-form" novalidate>
+          <p class="form-error" id="email-error" hidden></p>
+          <label>Нова електронна адреса
+            <input type="email" name="email" autocomplete="email">
+          </label>
+          <label>Поточний пароль
+            <div class="pass-wrap">
+              <input type="password" id="em-pass" name="password" autocomplete="current-password">
+              <button type="button" class="toggle-pass" data-target="em-pass" aria-label="Показати пароль">👁</button>
+            </div>
+          </label>
+          <button type="submit" class="btn btn-lg btn-block" id="email-btn">Отримати код</button>
+          <p class="auth-switch"><button type="button" class="link-btn" data-go="profile">← Назад</button></p>
+        </form>
+      </section>
+
+      <!-- 9. Видалення акаунта -->
+      <section id="view-delete" hidden>
+        <h2>Видалити акаунт</h2>
+        <p class="danger-note">
+          ⚠️ Акаунт буде видалено, а пошта відв’язана від сайту. Цю дію не можна скасувати.
+          Пізніше ви зможете зареєструвати цю пошту заново.
+        </p>
+        <form id="delete-form" class="auth-form" novalidate>
+          <p class="form-error" id="delete-error" hidden></p>
+          <label>Пароль
+            <div class="pass-wrap">
+              <input type="password" id="del-pass" name="password" autocomplete="current-password">
+              <button type="button" class="toggle-pass" data-target="del-pass" aria-label="Показати пароль">👁</button>
+            </div>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" name="agree">
+            <span>Я розумію, що акаунт буде видалено назавжди</span>
+          </label>
+          <button type="submit" class="btn btn-lg btn-block btn-danger" id="delete-btn">Отримати код для видалення</button>
+          <p class="auth-switch"><button type="button" class="link-btn" data-go="profile">← Скасувати</button></p>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin-access.js"></script>
+</body>
+</html>

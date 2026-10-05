@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кошик — APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">❄️APEX<span>SETUP</span></a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="recommendations.html">Рекомендації</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1 class="page-title">Кошик</h1>
+
+    <!-- Вміст кошика -->
+    <div id="cart-content">
+      <div id="cart-items"></div>
+
+      <div class="cart-summary" id="cart-summary">
+        <p>Загальна кількість товарів: <strong id="total-qty">0</strong></p>
+        <p class="total">Разом: <strong id="total-sum">$0</strong></p>
+        <button class="btn btn-lg" id="checkout-btn">Оформити замовлення</button>
+      </div>
+    </div>
+
+    <p class="empty" id="cart-empty" hidden>
+      Ваш кошик порожній. <a href="catalog.html">Перейти до каталогу</a>
+    </p>
+
+    <!-- Форма замовлення -->
+    <section class="checkout" id="checkout" hidden>
+      <h2 class="section-title">Оформлення замовлення</h2>
+      <div class="checkout-grid">
+
+        <form id="order-form" class="order-form">
+          <label>Ім’я та прізвище
+            <input type="text" name="name" required>
+          </label>
+          <label>Номер телефону
+            <input type="tel" name="phone" placeholder="+380..." required>
+          </label>
+          <label>Email
+            <input type="email" name="email" required>
+          </label>
+          <label>Місто
+            <input type="text" name="city" required>
+          </label>
+          <label>Нова пошта / спосіб доставки
+            <input type="text" name="delivery" placeholder="Нова пошта, відділення №..." required>
+          </label>
+          <label>Коментар до замовлення
+            <textarea name="comment" rows="3"></textarea>
+          </label>
+          <button type="submit" class="btn btn-lg">Підтвердити замовлення</button>
+        </form>
+
+        <div class="order-summary">
+          <h3>Ваше замовлення</h3>
+          <ul id="order-list"></ul>
+          <p class="total">Загальна сума: <strong id="order-total">$0</strong></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Повідомлення про успіх -->
+  <div class="overlay" id="success" hidden>
+    <div class="modal">
+      <div class="modal-icon">✅</div>
+      <h2>Дякуємо за замовлення!</h2>
+      <p>Ваше замовлення успішно оформлено.</p>
+      <a href="index.html" class="btn">На головну</a>
+    </div>
+  </div>
+
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

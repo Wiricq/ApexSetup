@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- Header (однаковий на всіх сторінках) -->
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">❄️APEX<span>SETUP</span></a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="recommendations.html">Рекомендації</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero з анімованим фоном -->
+  <section class="hero">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+    <div class="hero-orb orb-4"></div>
+    <div class="hero-orb orb-5"></div>
+     <div class="hero-orb orb-6"></div>
+    <div class="hero-grid"></div>
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+
+    <div class="container hero-inner">
+      <h1>☄️APEX<span>SETUP</span></h1>
+      <p>Все необхідне для твого ідеального gaming setup</p>
+      <a href="catalog.html" class="btn btn-lg">Перейти до каталогу</a>
+    </div>
+  </section>
+
+   <div class="container hero-inner">
+      <h1>Відкриття магазину!</span></h1>
+      <p>Ми відкрилися!💥І на честь цієї події даруємо знижки на будь-які гаджети та периферію.🔥</p>
+       <p>Знижки діють до кінця місяця, включно від початку роботи сайту.</p>
+       </div>
+  </section>
+
+  <!-- Категорії -->
+  <section class="container section">
+    <h2 class="section-title">Наші категорії</h2>
+    <div class="cat-grid">
+      <a href="catalog.html?cat=keyboards" class="cat-card"><span>⌨️</span>Клавіатури</a>
+      <a href="catalog.html?cat=mice" class="cat-card"><span>🖱️</span>Миші</a>
+      <a href="catalog.html?cat=pads" class="cat-card"><span>🟥</span>Килимки для миші</a>
+      <a href="catalog.html?cat=gamepads" class="cat-card"><span>🎮</span>Геймпади</a>
+      <a href="catalog.html?cat=headsets" class="cat-card"><span>🎧</span>Навушники</a>
+    </div>
+  </section>
+
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/hero.js"></script>
+</body>
+</html>

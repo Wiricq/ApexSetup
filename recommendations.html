@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Рекомендації — APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">❄️APEX<span>SETUP</span></a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="recommendations.html">Рекомендації</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1 class="page-title">Рекомендовані товари</h1>
+
+    <div id="popular-head">
+      <h2 class="section-title">🔥 Популярні товари</h2>
+      <p class="muted">Топ-5 товарів, які найчастіше додавали в кошик.</p>
+    </div>
+
+    <div class="products-grid" id="popular"></div>
+
+    <!-- Порожній стан -->
+    <div class="empty-state" id="popular-empty" hidden>
+      <div class="empty-icon">🔥</div>
+      <h2>Рекомендацій поки немає</h2>
+      <p>Тут з’являться популярні товари, щойно вони будуть у каталозі.</p>
+      <a href="index.html" class="btn">На головну</a>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/recommendations.js"></script>
+</body>
+</html>

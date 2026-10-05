@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакти — APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contacts.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">❄️APEX<span>SETUP</span></a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="recommendations.html">Рекомендації</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1 class="page-title">Контакти</h1>
+    <p class="muted">Маєте питання щодо товару чи замовлення? Напишіть або зателефонуйте нам.</p>
+
+    <div class="contact-layout">
+
+      <!-- Картки з контактами (замініть дані на свої) -->
+      <div class="contact-cards">
+        <a class="contact-card" href="tel:+380 96 638 24 45">
+          <span class="contact-icon">📞</span>
+          <span><small>Телефон</small>+380 96 638 24 45</span>
+        </a>
+        <a class="contact-card" href="mailto:apexsetupix@gmail.com">
+          <span class="contact-icon">✉️</span>
+          <span><small>Email</small>apexsetupix@gmail.com</span>
+        </a>
+        <a class="contact-card" href="https://t.me/apexsetuptg" target="_blank" rel="noopener">
+          <span class="contact-icon">💬</span>
+          <span><small>Telegram</small>@apexsetuptg</span>
+        </a>
+        <a class="contact-card" href="https://instagram.com/apexsetupix" target="_blank" rel="noopener">
+          <span class="contact-icon">📸</span>
+          <span><small>Instagram</small>@apexsetup</span>
+        </a>
+        <div class="contact-card">
+          <span class="contact-icon">📍</span>
+          <span><small>Адреса</small>Львівська область, місто Стрий</span>
+        </div>
+        <div class="contact-card">
+          <span class="contact-icon">🕒</span>
+          <span><small>Графік роботи</small>Пн–Нд 15:00–20:00</span>
+        </div>
+      </div>
+
+      <!-- Форма зворотного зв'язку (імітація, без сервера) -->
+      <form class="order-form" id="contact-form">
+        <h2 class="section-title">Напишіть нам</h2>
+        <label>Ім’я
+          <input type="text" name="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Повідомлення
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="btn btn-lg">Надіслати</button>
+        <p class="form-success" id="contact-success" hidden>✅ Дякуємо! Ми відповімо вам найближчим часом.</p>
+      </form>
+
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/contacts.js"></script>
+</body>
+</html>

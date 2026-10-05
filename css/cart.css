@@ -1,0 +1,23 @@
+/* ===== Кількість товару в кошику: кнопки «−» «+» і поле вводу ===== */
+.qty { gap: 8px; }
+
+.qty button {
+  width: 38px; height: 38px;
+  font-size: 1.3rem; font-weight: 700; line-height: 1;
+  background: var(--bg2); color: #fff;
+  border: 1px solid #2a2a2a; border-radius: 10px;
+  cursor: pointer; transition: background .2s, transform .1s, border-color .2s;
+}
+.qty button:hover { background: var(--accent); border-color: var(--accent); }
+.qty button:active { transform: scale(.92); }
+
+.qty-input {
+  width: 62px; height: 38px;
+  text-align: center; font-size: 1.05rem; font-weight: 700;
+  background: var(--bg); color: #fff;
+  border: 1px solid #2a2a2a; border-radius: 10px;
+  -moz-appearance: textfield;          /* прибираємо стрілки у Firefox */
+}
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.qty-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(225, 29, 72, .25); }

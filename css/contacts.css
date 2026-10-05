@@ -1,0 +1,38 @@
+/* ===== Сторінка контактів ===== */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.contact-cards { display: grid; gap: 14px; }
+
+.contact-card {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card); border: 1px solid var(--bg2); border-radius: var(--radius);
+  padding: 16px 18px; color: #fff; font-weight: 600;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+a.contact-card:hover {
+  transform: translateX(6px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 26px rgba(225, 29, 72, .25);
+}
+.contact-card small {
+  display: block; color: var(--muted); font-weight: 400; font-size: .8rem;
+}
+.contact-icon {
+  flex-shrink: 0; width: 54px; height: 54px;
+  display: grid; place-items: center;
+  font-size: 1.7rem; background: var(--bg2); border-radius: 14px;
+}
+
+.form-success {
+  margin-top: 16px; padding: 12px 16px; border-radius: 10px;
+  background: rgba(225, 29, 72, .15); border: 1px solid var(--accent);
+}
+
+@media (max-width: 800px) {
+  .contact-layout { grid-template-columns: 1fr; }
+}

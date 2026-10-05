@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адмін-панель — APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/orders.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">❄️APEX<span>SETUP</span></a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="recommendations.html">Рекомендації</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section admin-page">
+    <h1 class="page-title">🛠 Адмін-панель</h1>
+
+    <!-- Повідомлення про доступ (показується одне з трьох) -->
+    <div class="empty-state" id="guard-login" hidden>
+      <div class="empty-icon">🔐</div>
+      <h2>Потрібен вхід</h2>
+      <p>Увійдіть в акаунт адміністратора, щоб керувати товарами.</p>
+      <a href="account.html" class="btn">Увійти</a>
+    </div>
+
+    <div class="empty-state" id="guard-denied" hidden>
+      <div class="empty-icon">⛔</div>
+      <h2>Немає доступу</h2>
+      <p>Адмін-панель доступна лише адміністратору сайту.</p>
+      <a href="index.html" class="btn">На головну</a>
+    </div>
+
+    <div class="empty-state" id="guard-config" hidden>
+      <div class="empty-icon">⚙️</div>
+      <h2>Адміністратора не налаштовано</h2>
+      <p>Вкажіть пошту адміністратора у файлі js/admin-access.js.</p>
+      <a href="index.html" class="btn">На головну</a>
+    </div>
+
+    <!-- Сама панель (тільки для адміна) -->
+    <div id="admin-panel" hidden>
+
+      <!-- ===== ТОВАРИ ===== -->
+      <div class="admin-stats">
+        <div class="stat-card"><strong id="stat-total">0</strong><span>Усього товарів</span></div>
+        <div class="stat-card"><strong id="stat-visible">0</strong><span>Показано в каталозі</span></div>
+        <div class="stat-card"><strong id="stat-out">0</strong><span>Немає в наявності</span></div>
+      </div>
+
+      <p class="admin-note" id="source-note"></p>
+
+      <div class="admin-toolbar">
+        <button type="button" class="btn" id="add-btn">+ Додати товар</button>
+        <input type="text" class="search" id="admin-search" placeholder="Пошук серед товарів...">
+        <button type="button" class="btn btn-outline" id="export-btn">⬇ Експортувати для сайту</button>
+        <button type="button" class="btn btn-outline" id="reset-btn" hidden>↩️ Скинути зміни</button>
+      </div>
+
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Фото</th>
+              <th>Товар</th>
+              <th>Ціна</th>
+              <th>Кількість зараз</th>
+              <th>Видимий</th>
+              <th>Дії</th>
+            </tr>
+          </thead>
+          <tbody id="admin-tbody"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="admin-empty" hidden></p>
+
+      <!-- ===== ЗАМОВЛЕННЯ ===== -->
+      <section class="orders-section" id="orders-section">
+        <h2 class="section-title">📦 Замовлення</h2>
+
+        <div class="admin-stats">
+          <div class="stat-card"><strong id="ord-new">0</strong><span>Нові</span></div>
+          <div class="stat-card"><strong id="ord-done">0</strong><span>Виконані</span></div>
+          <div class="stat-card"><strong id="ord-cancelled">0</strong><span>Скасовані</span></div>
+          <div class="stat-card"><strong id="ord-revenue">$0</strong><span>Сума (без скасованих)</span></div>
+        </div>
+
+        <p class="admin-note">
+          Замовлення зберігаються в цьому браузері. Кількість товару зменшується при оформленні замовлення
+          і повертається, якщо ви його скасуєте.
+        </p>
+
+        <div class="filters" id="order-filters">
+          <button type="button" class="filter-btn active" data-filter="all">Усі <b>0</b></button>
+          <button type="button" class="filter-btn" data-filter="new">Нові <b>0</b></button>
+          <button type="button" class="filter-btn" data-filter="done">Виконані <b>0</b></button>
+          <button type="button" class="filter-btn" data-filter="cancelled">Скасовані <b>0</b></button>
+        </div>
+
+        <div class="orders-list" id="orders-list"></div>
+        <p class="empty" id="orders-empty" hidden></p>
+      </section>
+
+      <details class="admin-details">
+        <summary>Як показати зміни всім відвідувачам сайту</summary>
+        <ol>
+          <li>Зміни в панелі зберігаються лише в цьому браузері, тому відвідувачі їх ще не бачать.</li>
+          <li>Натисніть «⬇ Експортувати для сайту» — завантажиться файл <b>products-data.js</b> (кількість записується без віднімання замовлень).</li>
+          <li>Покладіть його в папку <b>js/</b> проєкту, замінивши старий файл.</li>
+          <li>Завантажте оновлені файли сайту на хостинг.</li>
+          <li>Після цього можна натиснути «Скинути зміни», щоб сайт брав товари з файлу.</li>
+        </ol>
+      </details>
+    </div>
+  </main>
+
+  <!-- Вікно додавання / редагування товару -->
+  <div class="overlay" id="product-modal" hidden>
+    <div class="modal admin-modal">
+      <h2 id="modal-title">Додати товар</h2>
+      <form id="product-form" class="admin-form" novalidate>
+        <p class="form-error" id="pf-error" hidden></p>
+
+        <div class="form-grid">
+          <label class="full">Назва
+            <input type="text" id="pf-name" maxlength="80">
+          </label>
+
+          <label>Категорія
+            <select id="pf-category"></select>
+          </label>
+
+          <label>Ціна ($)
+            <input type="number" id="pf-price" min="0" step="0.01">
+          </label>
+
+          <label>Кількість у наявності зараз
+            <input type="number" id="pf-stock" min="0" step="1" placeholder="порожньо = без обмеження">
+            <small class="field-note" id="pf-stock-note" hidden></small>
+          </label>
+
+          <label>Рейтинг
+            <select id="pf-rating">
+              <option value="0">Без рейтингу</option>
+              <option value="1">⭐</option>
+              <option value="2">⭐⭐</option>
+              <option value="3">⭐⭐⭐</option>
+              <option value="4">⭐⭐⭐⭐</option>
+              <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+          </label>
+
+          <label class="full">Опис
+            <textarea id="pf-desc" rows="3" maxlength="500"></textarea>
+          </label>
+
+          <div class="full image-box">
+            <img class="image-preview" id="pf-preview" alt="Попередній перегляд" data-category="keyboards">
+            <div class="image-controls">
+              <button type="button" class="btn btn-sm" id="pf-image-pick">📷 Завантажити фото</button>
+              <button type="button" class="btn btn-sm btn-outline" id="pf-image-remove" hidden>Прибрати фото</button>
+              <input type="file" id="pf-image-file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+              <label>Або шлях / посилання на фото
+                <input type="text" id="pf-image-path" placeholder="images/k100.jpg">
+              </label>
+            </div>
+          </div>
+
+          <label class="full check-row">
+            <input type="checkbox" id="pf-visible" checked>
+            <span>Показувати товар у каталозі</span>
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="modal-cancel">Скасувати</button>
+          <button type="submit" class="btn">Зберегти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin-access.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
