@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Товар — APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">APEX</span>SETUP</span></a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="dream-setup.html">Сетап мрії</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <!-- Сюди автоматично виводитиметься вся інформація про товар -->
+    <div id="product-root"></div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <!-- Основні скрипти -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin-access.js"></script>
+
+  <!-- Вбудований скрипт для сторінки товару (без окремого product-page.js) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const root = document.getElementById("product-root");
+      if (!root) return;
+
+      // Отримуємо ID товару з URL (наприклад: product.html?id=p123)
+      const params = new URLSearchParams(location.search);
+      const id = params.get("id");
+
+      const product = typeof getProductById === "function" ? getProductById(id) : null;
+
+      if (!product) {
+        root.innerHTML = `
+          <div class="empty-state" style="text-align: center; padding: 60px 0;">
+            <div class="empty-icon">🔍</div>
+            <h2>Товар не знайдено</h2>
+            <p>Можливо, його було видалено або введено невірне посилання.</p>
+            <a href="catalog.html" class="btn" style="margin-top: 20px; display: inline-block;">Повернутися до каталогу</a>
+          </div>
+        `;
+        return;
+      }
+
+      const name = escapeHTML(product.name);
+      const categoryName = CATEGORY_NAMES[product.category] || product.category;
+      const image = escapeHTML(product.image || placeholderImage(product.category));
+      const hasDiscount = Number(product.discount) > 0;
+      const priceVal = Number(product.price) || 0;
+      const fPrice = hasDiscount ? finalPrice(priceVal, product.discount) : priceVal;
+
+      const priceHTMLContent = hasDiscount
+        ? `<div class="product-prices"><s class="old-price">${escapeHTML(formatPrice(priceVal))}</s> <b class="price price-big">${escapeHTML(formatPrice(fPrice))}</b> <span class="sale-tag">-${product.discount}%</span></div>`
+        : `<div class="product-prices"><b class="price price-big">${escapeHTML(formatPrice(priceVal))}</b></div>`;
+
+      // Генерація списку характеристик, якщо вони є у товару
+      let attrsHTML = "";
+      if (product.attrs && typeof product.attrs === "object") {
+        const attrEntries = Object.entries(product.attrs);
+        if (attrEntries.length > 0) {
+          const defs = (CATEGORY_ATTRS[product.category] || {});
+          attrsHTML = `<div class="product-attrs" style="margin: 20px 0;"><h3>Характеристики:</h3><ul style="list-style: none; padding: 0; opacity: 0.9;">`;
+          for (const [k, v] of attrEntries) {
+            const label = defs[k] && defs[k].label ? defs[k].label : k;
+            const optLabel = defs[k] && defs[k].options && defs[k].options[v] ? defs[k].options[v] : v;
+            attrsHTML += `<li style="padding: 4px 0;"><b>${escapeHTML(label)}:</b> ${escapeHTML(optLabel)}</li>`;
+          }
+          attrsHTML += `</ul></div>`;
+        }
+      }
+
+      const descHTML = product.desc ? `<p class="product-description" style="margin: 20px 0; line-height: 1.6;">${escapeHTML(product.desc)}</p>` : `<p class="muted" style="margin: 20px 0;">Опис відсутній.</p>`;
+      const wishBtn = typeof wishButtonHTML === "function" ? wishButtonHTML(product.id) : "";
+
+      // Виводимо всю інформацію у блок #product-root
+      root.innerHTML = `
+        <div class="product-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: start;">
+          <div class="product-gallery" style="position: relative;">
+            <img src="${image}" alt="${name}" style="width: 100%; border-radius: 16px; object-fit: cover; background: #111827;">
+            <div style="position: absolute; top: 15px; right: 15px;">${wishBtn}</div>
+          </div>
+          <div class="product-details">
+            <span class="product-category" style="text-transform: uppercase; font-size: 0.85rem; opacity: 0.7; letter-spacing: 0.05em;">${escapeHTML(categoryName)}</span>
+            <h1 style="margin: 10px 0 15px; font-size: 2rem;">${name}</h1>
+            ${priceHTMLContent}
+            ${descHTML}
+            ${attrsHTML}
+            <div style="margin-top: 30px;">
+              <button type="button" class="btn" data-add="${escapeHTML(product.id)}" style="padding: 12px 30px; font-size: 1rem;">Додати в кошик</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (typeof syncWishlistUI === "function") {
+        syncWishlistUI();
+      }
+    });
+  </script>
+</body>
+</html>

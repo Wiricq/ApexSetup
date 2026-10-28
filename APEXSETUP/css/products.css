@@ -1,0 +1,71 @@
+/* ===== Сторінка товару ===== */
+.pp-crumbs { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 18px; font-size: .88rem; opacity: .85; }
+.pp-crumbs a { color: inherit; text-decoration: none; }
+.pp-crumbs a:hover { text-decoration: underline; }
+
+.pp-main { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+
+.pp-gallery { position: relative; }
+.pp-gallery .wish-wrap { border-radius: 22px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .06); }
+.pp-gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.pp-gallery .wish-btn { width: 46px; height: 46px; right: 14px; bottom: 14px; }
+.pp-sale { position: absolute; top: 14px; left: 14px; z-index: 3; padding: 6px 14px; border-radius: 999px; font-weight: 800; color: #fff; background: #e11d48; }
+
+.pp-info h1 { margin: 6px 0 10px; font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.2; overflow-wrap: anywhere; }
+.pp-cat { font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+.pp-rating { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 14px; }
+.pp-stars { letter-spacing: 2px; color: #fbbf24; font-size: 1.05rem; }
+.pp-rating a { color: inherit; text-decoration: underline; font-size: .9rem; opacity: .85; }
+
+.pp-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin: 6px 0 4px; }
+.pp-price-now { font-size: 2rem; font-weight: 800; }
+.pp-price-old { font-size: 1.05rem; text-decoration: line-through; opacity: .6; }
+.pp-price-sub { width: 100%; font-size: .85rem; opacity: .7; }
+
+.pp-stock { display: inline-block; margin: 10px 0 14px; font-weight: 700; }
+.pp-stock.ok { color: #22c55e; } .pp-stock.low { color: #f59e0b; } .pp-stock.out { color: #ef4444; }
+
+.pp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.pp-tags span { padding: 5px 12px; border-radius: 999px; font-size: .82rem; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .25); }
+
+.pp-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 18px; }
+.pp-actions .btn { flex: 1 1 180px; }
+
+.pp-box { margin: 0 0 14px; padding: 14px 18px; border-radius: 16px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .22); font-size: .92rem; line-height: 1.6; }
+.pp-box a { text-decoration: underline; }
+.pp-desc { white-space: pre-line; line-height: 1.7; overflow-wrap: anywhere; }
+
+.pp-section { margin-top: 44px; }
+.pp-section > h2 { margin: 0 0 16px; font-size: 1.4rem; }
+
+/* Відгуки */
+.pp-reviews { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 26px; align-items: start; }
+.pp-summary { padding: 18px; border-radius: 18px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .22); }
+.pp-avg { font-size: 2.6rem; font-weight: 800; line-height: 1; }
+.pp-bar { display: grid; grid-template-columns: 26px minmax(0, 1fr) 24px; align-items: center; gap: 8px; margin: 6px 0; font-size: .82rem; }
+.pp-bar i { display: block; height: 8px; border-radius: 999px; background: rgba(255, 255, 255, .15); overflow: hidden; }
+.pp-bar i b { display: block; height: 100%; background: #fbbf24; }
+
+.pp-review { padding: 14px 18px; margin-bottom: 12px; border-radius: 16px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .2); }
+.pp-review-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-bottom: 6px; }
+.pp-review-head b { overflow-wrap: anywhere; }
+.pp-verified { font-size: .75rem; padding: 2px 10px; border-radius: 999px; color: #bbf7d0; border: 1px solid rgba(34, 197, 94, .6); background: rgba(34, 197, 94, .15); }
+.pp-review-date { margin-left: auto; font-size: .8rem; opacity: .65; }
+.pp-review p { margin: 6px 0 0; line-height: 1.6; white-space: pre-line; overflow-wrap: anywhere; }
+.pp-review .btn { margin-top: 8px; }
+
+.pp-form { margin-top: 18px; padding: 18px; border-radius: 18px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .22); }
+.pp-form h3 { margin: 0 0 10px; }
+.pp-star-input { display: flex; gap: 4px; margin-bottom: 12px; }
+.pp-star-input button { padding: 2px; font-size: 1.8rem; line-height: 1; color: rgba(255, 255, 255, .35); background: none; border: 0; cursor: pointer; transition: transform .15s, color .15s; }
+.pp-star-input button.on { color: #fbbf24; }
+.pp-star-input button:hover { transform: scale(1.15); }
+.pp-form textarea { display: block; width: 100%; box-sizing: border-box; margin-bottom: 10px; padding: 12px 14px; font: inherit; color: #fff; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .3); border-radius: 14px; }
+.pp-form textarea:focus { outline: none; border-color: #ff3b4a; }
+.pp-error { margin: 0 0 10px; padding: 10px 14px; border-radius: 10px; font-size: .9rem; background: rgba(239, 68, 68, .14); border: 1px solid #ef4444; }
+
+@media (max-width: 800px) {
+  .pp-main, .pp-reviews { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .pp-price-now { font-size: 1.7rem; }
+  .pp-actions .btn { flex-basis: 100%; }
+}

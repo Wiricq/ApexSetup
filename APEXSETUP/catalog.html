@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">APEXSETUP</a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="dream-setup.html">Сетап мрії</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1 class="page-title">Каталог товарів</h1>
+
+    <!-- Пошук і фільтри (ховаються, поки немає товарів) -->
+    <div id="catalog-tools">
+      <input type="text" id="search" class="search" placeholder="Пошук товарів...">
+      <div class="filters" id="filters"></div>
+
+      <!-- Кнопка відкриття фільтрів -->
+      <div class="filters-toggle-row">
+        <button type="button" class="btn btn-sm btn-outline" id="filters-toggle" aria-expanded="false" aria-controls="filter-panel">
+          ⚙️ Фільтри <span class="filters-badge" id="filters-badge" hidden>0</span> <span id="filters-arrow" aria-hidden="true">▾</span>
+        </button>
+      </div>
+
+      <!-- Панель фільтрів (відкривається кнопкою) -->
+      <div class="filter-panel" id="filter-panel" hidden>
+        <div class="fp-row">
+          <div class="fp-group">
+            <span class="fp-title">Ціна, ₴</span>
+            <div class="fp-price">
+              <input type="number" id="price-min" min="0" step="1" placeholder="від" aria-label="Ціна від">
+              <span>—</span>
+              <input type="number" id="price-max" min="0" step="1" placeholder="до" aria-label="Ціна до">
+            </div>
+          </div>
+
+          <div class="fp-group">
+            <span class="fp-title">Сортування</span>
+            <select id="sort-select" aria-label="Сортування">
+              <option value="default">За замовчуванням</option>
+              <option value="popular">Найпопулярніші</option>
+              <option value="price-asc">Ціна: від дешевих до дорогих</option>
+              <option value="price-desc">Ціна: від дорогих до дешевих</option>
+              <option value="discount">Найбільша знижка</option>
+              <option value="rating">За рейтингом</option>
+            </select>
+          </div>
+
+          <div class="fp-group fp-checks">
+            <label class="fp-check"><input type="checkbox" id="only-stock"> Тільки в наявності</label>
+            <label class="fp-check"><input type="checkbox" id="only-sale"> Зі знижкою</label>
+          </div>
+        </div>
+
+        <!-- Характеристики (з'являються після вибору категорії) -->
+        <div class="fp-attrs" id="attr-filters"></div>
+
+        <div class="fp-foot">
+          <span id="results-count"></span>
+          <button type="button" class="btn btn-sm btn-outline" id="filters-reset">Скинути фільтри</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Сітка товарів -->
+    <div class="products-grid" id="products"></div>
+    <p class="empty" id="empty" hidden>Нічого не знайдено 😕 Спробуйте змінити фільтри.</p>
+
+    <!-- Порожній каталог -->
+    <div class="empty-state" id="empty-state" hidden>
+      <div class="empty-icon">🎮</div>
+      <h2>Товарів поки немає</h2>
+      <p>Каталог готується. Скоро тут з’являться товари.</p>
+      <a href="index.html" class="btn">На головну</a>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/catalog.js"></script>
+</body>
+</html>

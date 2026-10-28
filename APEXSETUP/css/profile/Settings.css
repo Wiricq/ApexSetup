@@ -1,0 +1,106 @@
+/* ===== Сторінка «Налаштування профілю»: вкладки ===== */
+.settings-card { max-width: 560px; }
+
+/* Плитки 3 x 2 + окрема кнопка «Видалення» */
+.settings-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* minmax(0,…) — щоб нічого не вилазило */
+  gap: 10px;
+  margin: 18px 0 22px;
+}
+
+.settings-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px 6px 12px;
+  background: var(--bg2);
+  color: rgba(255, 255, 255, .78);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 14px;
+  font: inherit;
+  font-size: .85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, color .2s, transform .2s, box-shadow .2s;
+}
+.settings-tab .tab-ico { font-size: 1.5rem; line-height: 1; }
+.settings-tab .tab-txt {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-tab:hover {
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.settings-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Активна вкладка */
+.settings-tab.active {
+  border-color: var(--accent);
+  background: linear-gradient(160deg, rgba(255, 59, 74, .38), rgba(255, 59, 74, .12));
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 59, 74, .25);
+}
+
+/* «Видалення» — широка вузька кнопка внизу */
+.settings-tab.danger {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  gap: 8px;
+  padding: 11px 14px;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, .07);
+  border-color: rgba(239, 68, 68, .25);
+}
+.settings-tab.danger .tab-ico { font-size: 1.1rem; }
+.settings-tab.danger:hover {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, .16);
+  color: #fecaca;
+}
+.settings-tab.danger.active {
+  border-color: #ef4444;
+  background: linear-gradient(160deg, rgba(239, 68, 68, .5), rgba(239, 68, 68, .22));
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, .3);
+}
+
+/* Панель вмісту */
+.tab-panel {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .08);
+  animation: tabFade .25s ease;
+}
+.tab-panel[hidden] { display: none; }
+.tab-panel > .muted { margin: 0 0 14px; }
+
+@keyframes tabFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.settings-card .auth-switch { margin-top: 22px; text-align: center; }
+.settings-card a.link-btn { text-decoration: none; }
+
+@media (max-width: 380px) {
+  .settings-tabs { gap: 8px; }
+  .settings-tab { font-size: .78rem; padding: 12px 4px 10px; }
+  .settings-tab .tab-ico { font-size: 1.3rem; }
+  .tab-panel { padding: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settings-tab, .tab-panel { transition: none; animation: none; }
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сетап мрії — APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/orders.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/dream.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">APEXSETUP</a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="dream-setup.html">Сетап мрії</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1 class="page-title">🎮 Сетап мрії</h1>
+
+    <!-- Якщо користувач не увійшов -->
+    <div class="empty-state" id="guard-login" hidden>
+      <div class="empty-icon">🔐</div>
+      <h2>Потрібен вхід</h2>
+      <p>Увійдіть в акаунт, щоб створити заявку на сетап мрії.</p>
+      <a href="account.html" class="btn">Увійти</a>
+    </div>
+
+    <div id="dream-panel" hidden>
+      <p class="dream-intro">
+        Розкажіть, який сетап ви хочете: вкажіть бюджет, колір і найважливіше для вас.
+        Наш менеджер розгляне заявку та підготує пропозицію. Статус і відповідь магазину ви побачите нижче.
+      </p>
+
+      <!-- Форма заявки -->
+      <section class="dream-card">
+        <h2 class="section-title" id="ds-form-title">Нова заявка</h2>
+        <p class="form-error" id="ds-error" hidden></p>
+
+        <form id="dream-form" class="admin-form" novalidate>
+          <div class="form-grid">
+
+            <!-- Готові пресети (тільки фото по центру, без тексту) -->
+            <div class="full" id="ds-presets-wrapper">
+              <span class="field-title">✨ Готові пресети від магазину</span>
+              <p class="muted-small">Оберіть один із готових варіантів або додайте власні фото-натхнення нижче.</p>
+              
+              <div class="presets-grid" id="ds-presets-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-top: 10px;">
+                
+                <button type="button" class="preset-card btn btn-outline" data-preset-img="images/preset-1.jpg" data-preset-name="Cyber Neon" style="padding: 4px; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 8px; background: transparent; cursor: pointer;">
+                  <img src="images/preset-1.jpg" alt="Cyber Neon" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; display: block;">
+                </button>
+
+                <button type="button" class="preset-card btn btn-outline" data-preset-img="images/preset-2.jpg" data-preset-name="Minimal Wood" style="padding: 4px; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 8px; background: transparent; cursor: pointer;">
+                  <img src="images/preset-2.jpg" alt="Minimal Wood" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; display: block;">
+                </button>
+
+                <button type="button" class="preset-card btn btn-outline" data-preset-img="images/preset-3.jpg" data-preset-name="Whitestorm" style="padding: 4px; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 8px; background: transparent; cursor: pointer;">
+                  <img src="images/preset-3.jpg" alt="Whitestorm" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; display: block;">
+                </button>
+
+                <button type="button" class="preset-card btn btn-outline" data-preset-img="images/preset-4.jpg" data-preset-name="Dark Pro" style="padding: 4px; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 8px; background: transparent; cursor: pointer;">
+                  <img src="images/preset-4.jpg" alt="Dark Pro" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; display: block;">
+                </button>
+
+                <button type="button" class="preset-card btn btn-outline" data-preset-img="images/preset-5.jpg" data-preset-name="Creator Studio" style="padding: 4px; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 8px; background: transparent; cursor: pointer;">
+                  <img src="images/preset-5.jpg" alt="Creator Studio" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; display: block;">
+                </button>
+
+              </div>
+            </div>
+
+            <div class="full">
+              <span class="field-title">Фото-натхнення (необов’язково, до 5 шт.)</span>
+              <div class="photo-grid" id="ds-photos"></div>
+              <div class="photo-controls">
+                <button type="button" class="btn btn-sm" id="ds-photo-pick">📷 Додати фото</button>
+                <input type="file" id="ds-photo-file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden>
+                <span class="muted-small" id="ds-photo-count"></span>
+              </div>
+              <p class="muted-small">Фото або скріншоти сетапів, які вам подобаються. Можна вибрати одразу кілька.</p>
+            </div>
+
+            <div class="full desk-block">
+              <button type="button" class="desk-toggle" id="ds-desk-toggle" aria-expanded="false" aria-controls="ds-desk-panel">
+                <span class="desk-toggle-title">🖥️ Ваш стіл <small>(необов’язково)</small></span>
+                <span class="desk-toggle-info" id="ds-desk-summary"></span>
+                <span class="desk-toggle-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div class="desk-panel" id="ds-desk-panel" hidden>
+                <p class="muted-small">Натисніть на зону, щоб «поставити» компонент. Стіл можна згорнути в будь-який момент: вибір збережеться.</p>
+                <div class="desk" id="ds-desk"></div>
+                <p class="desk-total" id="ds-desk-total"></p>
+              </div>
+            </div>
+
+            <label class="full">Бюджет (₴)
+              <input type="number" id="ds-budget" min="1" step="100" placeholder="наприклад, 30000">
+              <small class="field-note" id="ds-budget-hint"></small>
+            </label>
+
+            <label class="full">Телефон (береться з вашого профілю)
+              <input type="tel" id="ds-phone" readonly>
+              <small class="field-note" id="ds-phone-note"></small>
+            </label>
+
+            <div class="full">
+              <span class="field-title">Бажаний колір</span>
+              <div class="color-grid" id="ds-colors"></div>
+            </div>
+
+            <div class="full">
+              <span class="field-title">Пріоритети (можна обрати кілька)</span>
+              <div class="chip-list chips-select" id="ds-priorities"></div>
+            </div>
+
+            <label class="full">Коментар
+              <textarea id="ds-comment" rows="4" maxlength="1000"
+                        placeholder="Для чого сетап, які ігри, що вже є, особливі побажання..."></textarea>
+            </label>
+
+            <div class="full desk-block">
+              <button type="button" class="desk-toggle" id="ds-promo-toggle" aria-expanded="false" aria-controls="ds-promo-panel">
+                <span class="desk-toggle-title">🎟 Промокод <small>(необов’язково)</small></span>
+                <span class="desk-toggle-info" id="ds-promo-summary"></span>
+                <span class="desk-toggle-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div class="desk-panel" id="ds-promo-panel" hidden>
+                <label>Введіть промокод
+                  <input type="text" id="ds-promo" maxlength="20" placeholder="наприклад, SETUP10" autocomplete="off">
+                  <small class="field-note" id="ds-promo-note"></small>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" id="ds-cancel-edit" hidden>Скасувати редагування</button>
+            <button type="submit" class="btn" id="ds-submit">Надіслати заявку</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Мої заявки -->
+      <section>
+        <h2 class="section-title">Мої заявки</h2>
+        <div class="orders-list" id="ds-list"></div>
+        <p class="empty" id="ds-empty" hidden></p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Збільшене фото -->
+  <div class="overlay" id="photo-modal" hidden>
+    <img class="photo-big" id="photo-big" alt="Фото-натхнення">
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <footer class="footer">© 2026 APEXSETUP. Усі права захищено.</footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/setups-core.js"></script>
+  <script src="js/setup-proposals.js"></script>
+  <script src="js/dream-desk.js"></script>
+  <script src="js/dream-setup.js"></script>
+</body>
+</html>

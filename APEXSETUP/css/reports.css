@@ -1,0 +1,19 @@
+/* ===== Сторінка «Репорти» ===== */
+.reports-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 12px; margin-bottom: 18px;
+}
+.reports-toolbar .filters { margin-bottom: 0; }
+.reports-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.reports-buttons .btn { margin: 0; }
+
+/* Текст повідомлення */
+.report-text {
+  margin: 12px 0 0; padding: 12px 14px;
+  background: var(--bg2); border-radius: 12px;
+  white-space: pre-wrap; word-break: break-word; font-size: .95rem;
+}
+
+/* Прочитані повідомлення */
+.order-card.is-read { border-left-color: #6b7280; opacity: .8; }
+.status-badge.read { background: rgba(107, 114, 128, .25); color: #d1d5db; }

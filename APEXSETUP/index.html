@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEXSETUP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/theme.css">
+    <style>
+    /* ===== Категорії: скляні картки з кольоровим підсвічуванням ===== */
+    .cat-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; }
+
+    .cat-grid .cat-card {
+      --c: 196, 92, 255;                         /* колір підсвічування категорії (r, g, b) */
+      position: relative; overflow: hidden; isolation: isolate;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      min-height: 208px; padding: 28px 14px 22px; text-align: center;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(var(--c), .34), transparent 62%),
+        var(--glass);
+      animation: catIn .6s cubic-bezier(.2, .8, .2, 1) both;
+      animation-delay: calc(var(--i, 0) * 70ms);
+      transition: transform .3s cubic-bezier(.2, .8, .2, 1), border-color .3s, box-shadow .3s;
+    }
+    .cat-grid .cat-card:hover, .cat-grid .cat-card:focus-visible {
+      transform: translateY(-8px);
+      border-color: rgba(var(--c), .9);
+      box-shadow: 0 30px 60px rgba(var(--c), .38), inset 0 1px 0 rgba(255, 255, 255, .35);
+      outline: none;
+    }
+    /* блиск, що пробігає по картці */
+    .cat-grid .cat-card::before {
+      content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: -60%; width: 40%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .16), transparent);
+      transform: skewX(-18deg); transition: left .7s ease;
+    }
+    .cat-grid .cat-card:hover::before { left: 120%; }
+
+    .cat-ico {
+      display: grid; place-items: center; width: 84px; height: 84px; margin-bottom: 14px;
+      border-radius: 28px;
+      background: linear-gradient(150deg, rgba(var(--c), .62), rgba(var(--c), .16));
+      border: 1px solid rgba(255, 255, 255, .3);
+      box-shadow: 0 12px 28px rgba(var(--c), .38), inset 0 1px 0 rgba(255, 255, 255, .45), inset 0 -8px 16px rgba(0, 0, 0, .14);
+      transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+    }
+    .cat-card:hover .cat-ico { transform: translateY(-3px) rotate(-6deg) scale(1.08); }
+    .cat-ico svg {
+      width: 46px; height: 46px; fill: none; stroke: #fff; stroke-width: 2.2;
+      stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .28));
+    }
+    .cat-ico svg .soft { fill: rgba(255, 255, 255, .2); }
+    .cat-ico svg .solid { fill: #fff; stroke: none; }
+    .cat-ico svg .pad { stroke: rgba(255, 255, 255, .55); stroke-width: 1.4; }
+    .cat-ico svg .pad-b, .cat-ico svg .pad-g { transition: transform .35s ease; transform-box: fill-box; transform-origin: center; }
+    .cat-ico svg .pad-b { transform: rotate(-15deg); }
+    .cat-ico svg .pad-g { transform: rotate(15deg); }
+    .cat-card:hover .cat-ico svg .pad-b { transform: translate(-2px, -1px) rotate(-22deg); }
+    .cat-card:hover .cat-ico svg .pad-g { transform: translate(2px, -1px) rotate(22deg); }
+
+    .cat-name { font-family: var(--font-display); font-size: 1.08rem; font-weight: 600; letter-spacing: .01em; }
+
+    .cat-go {
+      display: grid; place-items: center; width: 34px; height: 34px; margin-top: auto; padding-top: 0;
+      border-radius: 50%; background: rgba(255, 255, 255, .92); color: #1a0626;
+      opacity: 0; transform: translateY(8px) scale(.8);
+      transition: opacity .3s, transform .3s cubic-bezier(.2, .8, .2, 1);
+    }
+    .cat-go svg { width: 16px; height: 16px; }
+    .cat-card:hover .cat-go, .cat-card:focus-visible .cat-go { opacity: 1; transform: none; }
+    @media (hover: none) { .cat-go { opacity: .85; transform: none; } }
+
+    @keyframes catIn { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cat-grid .cat-card { animation: none; }
+      .cat-grid .cat-card::before { display: none; }
+    }
+
+    /* Планшет: 3 + 2 по центру */
+    @media (max-width: 1000px) {
+      .cat-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .cat-grid .cat-card { grid-column: span 2; }
+      .cat-grid .cat-card:nth-child(4) { grid-column: 2 / span 2; }
+      .cat-grid .cat-card:nth-child(5) { grid-column: 4 / span 2; }
+    }
+    /* Телефон: 2 колонки, остання картка на всю ширину */
+    @media (max-width: 640px) {
+      .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .cat-grid .cat-card, .cat-grid .cat-card:nth-child(4), .cat-grid .cat-card:nth-child(5) { grid-column: auto; }
+      .cat-grid .cat-card:nth-child(5) { grid-column: 1 / -1; }
+      .cat-grid .cat-card { min-height: 172px; padding: 22px 10px 18px; }
+      .cat-ico { width: 70px; height: 70px; border-radius: 24px; }
+      .cat-ico svg { width: 38px; height: 38px; }
+      .cat-name { font-size: .98rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header (однаковий на всіх сторінках) -->
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">APEX</span>SETUP</a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+      <nav class="nav" id="nav">
+        <a href="catalog.html">Каталог</a>
+        <a href="dream-setup.html">Сетап мрії</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="cart.html" class="cart-link">🛒 Кошик <span class="cart-count" id="cart-count">0</span></a>
+        <a href="account.html" class="account-link" id="account-link" title="Увійти в акаунт" aria-label="Акаунт">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <span class="account-label" id="account-label">Акаунт</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Сцена: скляна панель + нижня пілюля -->
+  <section class="container stage">
+    <div class="stage-panel">
+
+      <div class="stage-top">
+        <div class="stage-head">
+          <span class="stage-kicker">APEXSETUP · 2026</span>
+          <h1 class="stage-title">Все необхідне для твого ідеального сетапу</h1>
+        </div>
+        <a class="pill-white" href="catalog.html">
+          Перейти до каталогу
+          <span class="pill-ava"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+        </a>
+      </div>
+
+      <!-- Банер: відкриття магазину -->
+      <div class="stage-banner">
+        <span class="cloud" style="--s:150px; left:-30px; top:18%"></span>
+        <span class="cloud" style="--s:110px; right:22%; top:8%"></span>
+        <span class="cloud" style="--s:90px; right:-20px; top:48%"></span>
+
+        <div class="banner-text">
+          <span class="banner-label">Відкриття магазину!</span>
+          <h2 class="banner-big">Знижки на всю периферію 💥</h2>
+          <p>Ми відкрилися! І на честь цієї події даруємо знижки на будь-які гаджети та периферію.🔥</p>
+          <p>Знижки діють до кінця місяця, включно від початку роботи сайту.</p>
+        </div>
+
+        <div class="banner-side">
+          <div class="side-pill"><i></i> До кінця місяця</div>
+          <a class="btn btn-lg" href="catalog.html">Обрати товари</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Нижня довга пілюля -->
+    <a class="stage-bar" href="catalog.html">
+      <span class="bar-thumb">⌨️</span>
+      <span class="bar-title">Відкриття · Периферія · 2026</span>
+      <span class="bar-cta">До каталогу</span>
+      <span class="bar-arrow"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+    </a>
+  </section>
+
+  <!-- Категорії -->
+  <section class="container section">
+    <h2 class="section-title">Наші категорії</h2>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+      <linearGradient id="padRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#e11d48"/></linearGradient>
+      <linearGradient id="padBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+      <linearGradient id="padGreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4ade80"/><stop offset="1" stop-color="#16a34a"/></linearGradient>
+    </defs></svg>
+    <div class="cat-grid">
+      <a href="catalog.html?cat=keyboards" class="cat-card" style="--c:196, 92, 255; --i:0">
+        <div class="cat-ico"><svg viewBox="0 0 48 48" aria-hidden="true"><rect class="soft" x="4" y="12" width="40" height="24" rx="6"/><g class="solid"><rect x="9" y="17" width="4" height="4" rx="1.2"/><rect x="15.5" y="17" width="4" height="4" rx="1.2"/><rect x="22" y="17" width="4" height="4" rx="1.2"/><rect x="28.5" y="17" width="4" height="4" rx="1.2"/><rect x="35" y="17" width="4" height="4" rx="1.2"/><rect x="9" y="23" width="4" height="4" rx="1.2"/><rect x="15.5" y="23" width="4" height="4" rx="1.2"/><rect x="22" y="23" width="4" height="4" rx="1.2"/><rect x="28.5" y="23" width="4" height="4" rx="1.2"/><rect x="35" y="23" width="4" height="4" rx="1.2"/><rect x="14" y="29" width="20" height="3.4" rx="1.7"/></g></svg></div>
+        <strong class="cat-name">Клавіатури</strong>
+        <em class="cat-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></em>
+      </a>
+      <a href="catalog.html?cat=mice" class="cat-card" style="--c:96, 165, 250; --i:1">
+        <div class="cat-ico"><svg viewBox="0 0 48 48" aria-hidden="true"><rect class="soft" x="13" y="5" width="22" height="38" rx="11"/><path d="M24 5v15M13 20h22"/><rect class="solid" x="22.4" y="9.5" width="3.2" height="6" rx="1.6"/></svg></div>
+        <strong class="cat-name">Миші</strong>
+        <em class="cat-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></em>
+      </a>
+      <a href="catalog.html?cat=pads" class="cat-card" style="--c:251, 113, 133; --i:2">
+        <div class="cat-ico"><svg viewBox="0 0 48 48" aria-hidden="true"><rect class="pad pad-b" x="3" y="10" width="24" height="28" rx="7" fill="url(#padBlue)"/><rect class="pad pad-g" x="21" y="10" width="24" height="28" rx="7" fill="url(#padGreen)"/><rect class="pad" x="12" y="7" width="24" height="31" rx="7.5" fill="url(#padRed)"/></svg></div>
+        <strong class="cat-name">Килимки для миші</strong>
+        <em class="cat-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></em>
+      </a>
+      <a href="catalog.html?cat=gamepads" class="cat-card" style="--c:52, 211, 153; --i:3">
+        <div class="cat-ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path class="soft" d="M14 15h20a8 8 0 0 1 7.7 6l2.4 9.4a4.6 4.6 0 0 1-8 4L32 32H16l-4.1 2.4a4.6 4.6 0 0 1-8-4L6.3 21A8 8 0 0 1 14 15z"/><path d="M15 20.5v7M11.5 24h7"/><circle class="solid" cx="32" cy="21.5" r="1.9"/><circle class="solid" cx="36.4" cy="26" r="1.9"/></svg></div>
+        <strong class="cat-name">Геймпади</strong>
+        <em class="cat-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></em>
+      </a>
+      <a href="catalog.html?cat=headsets" class="cat-card" style="--c:251, 146, 60; --i:4">
+        <div class="cat-ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 29v-5a15 15 0 0 1 30 0v5"/><rect class="soft" x="5.5" y="26" width="9" height="15" rx="4.5"/><rect class="soft" x="33.5" y="26" width="9" height="15" rx="4.5"/></svg></div>
+        <strong class="cat-name">Навушники</strong>
+        <em class="cat-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></em>
+      </a>
+    </div>
+  </section>
+
+  <!-- Нові товари (5 найпопулярніших за додаваннями в кошик) -->
+  <section class="container section" id="popular-section" hidden>
+    <h2 class="section-title">Нові товари</h2>
+    <div class="products-grid" id="popular-products"></div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+  <footer class="footer">
+    © 2026 APEXSETUP. Усі права захищено. · <a href="SiteRules.html">Правила сайту</a>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/popular.js"></script>
+</body>
+</html>

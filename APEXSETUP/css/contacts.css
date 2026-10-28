@@ -1,0 +1,77 @@
+/* ===== Сторінка контактів ===== */
+/* Усе по центру: вступний текст і акуратна сітка однакових карток */
+
+/* Вступний текст під заголовком */
+main > p,
+.contact-intro {
+  max-width: 640px;
+  margin: 0 auto 32px;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
+  margin: 0 auto;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Картки контактів: 2 в ряд, остання непарна — на всю ширину */
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.contact-cards > .contact-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 150px;
+  padding: 22px 18px;
+  box-sizing: border-box;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--bg2);
+  border-radius: var(--radius);
+  color: #fff;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+a.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 26px rgba(225, 29, 72, .25);
+}
+.contact-card small {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-weight: 400;
+  font-size: .8rem;
+  letter-spacing: .04em;
+}
+.contact-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  background: var(--bg2);
+  border-radius: 16px;
+}
+
+@media (max-width: 640px) {
+  .contact-cards { grid-template-columns: minmax(0, 1fr); }
+  .contact-card { min-height: 0; }
+}

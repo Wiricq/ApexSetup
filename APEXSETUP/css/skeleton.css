@@ -1,0 +1,36 @@
+/* ======================================================
+   Скелетони (замість порожнього екрана при завантаженні)
+   Підключення: <link rel="stylesheet" href="css/skeleton.css"> + js/skeleton.js
+   ====================================================== */
+.skeleton {
+  position: relative; overflow: hidden; display: block;
+  background: rgba(255, 255, 255, .09); border-radius: 10px;
+}
+.skeleton::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(227, 182, 247, .24), transparent);
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer { to { transform: translateX(100%); } }
+
+.sk-line { height: 14px; margin: 12px 0; }
+.sk-line.w50 { width: 50%; } .sk-line.w60 { width: 60%; } .sk-line.w70 { width: 70%; }
+.sk-line.w80 { width: 80%; } .sk-line.w90 { width: 90%; }
+
+.sk-card { pointer-events: none; }
+.sk-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.sk-title { width: 220px; max-width: 55%; height: 22px; }
+.sk-pill { width: 96px; height: 26px; border-radius: 999px; }
+.sk-steps { height: 28px; margin: 18px 0 8px; border-radius: 999px; }
+.sk-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 700px) { .sk-cols { grid-template-columns: 1fr; gap: 0; } }
+
+/* Картка товару (для каталогу): <div class="product-card sk-product">…</div> */
+.sk-product .sk-img { height: 200px; border-radius: 0; }
+.sk-product .sk-body { padding: 16px; }
+
+#orders-panel.is-loading .filters { opacity: .45; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after { animation: none; }
+}

@@ -1,0 +1,120 @@
+/* ===== Іконка акаунта в header (на всіх сторінках) ===== */
+.nav .account-link {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--bg2);
+  background: var(--card);
+  color: #fff;
+  transition: border-color .2s, box-shadow .2s, color .2s, background .2s;
+}
+.nav .account-link:hover { border-color: var(--accent); box-shadow: 0 0 18px rgba(225, 29, 72, .4); }
+
+/* Зелена крапка, коли користувач увійшов */
+.nav .account-link.logged-in::after {
+  content: "";
+  position: absolute; right: 1px; bottom: 1px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #22c55e; border: 2px solid var(--card);
+}
+.account-label { display: none; }
+
+@media (max-width: 800px) {
+  .nav .account-link {
+    width: auto; height: auto; padding: 8px 16px;
+    border-radius: 10px; border: none; background: transparent;
+    justify-content: flex-start; gap: 10px;
+  }
+  .nav .account-link.logged-in::after { right: auto; left: 34px; bottom: 6px; }
+  .account-label { display: inline; }
+}
+
+/* ===== Загальні додаткові кнопки ===== */
+.btn-block { display: block; width: 100%; text-align: center; margin-bottom: 12px; }
+.btn-outline { background: transparent; border: 1px solid var(--accent); color: #fff; }
+.btn-outline:hover { background: var(--accent); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ===== Сторінка акаунта ===== */
+.auth-page { display: flex; justify-content: center; }
+.auth-card {
+  position: relative; overflow: hidden;
+  width: min(480px, 100%);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(225, 29, 72, .16), transparent 55%),
+    var(--card);
+  border: 1px solid var(--bg2); border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 0 60px rgba(124, 58, 237, .12);
+}
+.auth-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.auth-card h1, .auth-card h2 { font-size: 1.8rem; margin-bottom: 6px; }
+.auth-card .muted { margin-bottom: 22px; }
+.auth-actions { margin-top: 26px; }
+
+/* Форми */
+.auth-form label { display: block; margin-bottom: 14px; color: var(--muted); font-size: .9rem; }
+.auth-form input {
+  width: 100%; margin-top: 6px; padding: 12px;
+  background: var(--bg2); color: #fff;
+  border: 1px solid transparent; border-radius: 10px;
+  font-size: 1rem; font-family: inherit;
+}
+.auth-form input:focus { outline: none; border-color: var(--accent); }
+
+/* Пароль із кнопкою "показати" */
+.pass-wrap { position: relative; margin-top: 6px; }
+.pass-wrap input { margin-top: 0; padding-right: 48px; }
+.toggle-pass {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--muted);
+  font-size: 1.15rem; cursor: pointer; padding: 6px 8px;
+}
+.toggle-pass:hover { color: #fff; }
+
+/* Помилки */
+.form-error {
+  background: rgba(225, 29, 72, .12); border: 1px solid var(--accent);
+  border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: .9rem;
+}
+
+/* Посилання-кнопки */
+.auth-switch { margin-top: 14px; text-align: center; color: var(--muted); font-size: .9rem; }
+.link-btn {
+  background: none; border: none; color: var(--accent);
+  cursor: pointer; font: inherit; text-decoration: underline;
+}
+.link-btn:hover { color: #fff; }
+
+/* Поле коду */
+.auth-form .code-input {
+  margin: 0 0 14px; text-align: center;
+  font-size: 1.9rem; font-weight: 800;
+  letter-spacing: .5em; padding: 14px 14px 14px calc(14px + .5em);
+}
+
+/* Демо-лист із кодом */
+.demo-mail {
+  margin: 0 0 18px; padding: 14px 16px; font-size: .9rem;
+  border: 1px dashed var(--accent-2); border-radius: 12px;
+  background: rgba(124, 58, 237, .12);
+}
+.demo-mail .code-show {
+  display: block; margin-top: 6px;
+  font-size: 2rem; font-weight: 800; letter-spacing: .4em; color: #fff;
+}
+
+/* Профіль */
+.profile { text-align: center; }
+.profile-avatar {
+  width: 90px; height: 90px; margin: 0 auto 14px;
+  display: grid; place-items: center;
+  border-radius: 50%; font-size: 2.4rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 30px rgba(225, 29, 72, .45);
+}
+.profile .muted { margin-bottom: 0; }

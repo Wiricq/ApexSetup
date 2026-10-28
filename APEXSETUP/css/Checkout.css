@@ -1,0 +1,50 @@
+/* ===== Оформлення замовлення: спосіб оплати ===== */
+.pay-methods {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.pay-methods legend {
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .8;
+}
+.pay-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+.pay-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 10px 14px;
+  box-sizing: border-box;
+  border: 2px solid rgba(255, 255, 255, .22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .1);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+.pay-option:hover { border-color: rgba(255, 140, 150, .7); }
+.pay-option input { width: 18px; height: 18px; margin: 0; flex: 0 0 auto; accent-color: #ff3b4a; }
+.pay-option:has(input:checked) {
+  border-color: var(--red-hi, #ff3b4a);
+  background: rgba(255, 59, 74, .22);
+  box-shadow: 0 6px 18px rgba(160, 10, 25, .35);
+}
+.pay-option small { display: block; font-weight: 400; opacity: .8; }
+.pay-note { margin: 10px 0 0; font-size: .9rem; opacity: .9; }
+
+/* Телефон із профілю (тільки для читання) */
+#order-form input[name="phone"][readonly] { opacity: .8; cursor: not-allowed; }
+#order-form .field-note { display: block; margin-top: 4px; font-size: .8rem; opacity: .85; }
+#order-form .field-note a { text-decoration: underline; }

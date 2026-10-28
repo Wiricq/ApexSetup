@@ -1,0 +1,103 @@
+/* ===== Історія замовлень в акаунті ===== */
+.history-section {
+  width: 100%;
+  max-width: 760px;
+  margin: 32px auto 0;
+}
+.history-section[hidden] { display: none; }
+
+.history-head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px;
+  margin-bottom: 14px;
+}
+.history-head h2 { margin: 0; font-size: 1.4rem; }
+.history-summary { color: var(--muted); font-size: .9rem; }
+
+.history-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.history-filters button {
+  padding: 8px 16px; border-radius: 999px; font: inherit; font-size: .85rem; font-weight: 600;
+  color: #fff; background: var(--bg2); border: 1px solid transparent; cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.history-filters button:hover { border-color: var(--accent); }
+.history-filters button.active { background: rgba(225, 29, 72, .25); border-color: var(--accent); }
+.history-filters b { margin-left: 4px; opacity: .8; }
+
+/* Картка замовлення */
+.oh-card {
+  margin-bottom: 14px; padding: 18px 20px;
+  background: var(--card); border: 1px solid var(--bg2); border-radius: var(--radius);
+}
+.oh-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.oh-title { font-weight: 800; font-size: 1.05rem; }
+.oh-date { margin-left: auto; color: var(--muted); font-size: .85rem; }
+.oh-hint { margin: 10px 0 12px; color: var(--muted); font-size: .9rem; }
+
+.oh-badge {
+  padding: 4px 12px; border-radius: 999px; font-size: .75rem; font-weight: 700; letter-spacing: .02em;
+  border: 1px solid transparent;
+}
+.oh-badge.new      { background: rgba(59, 130, 246, .2);  color: #93c5fd; border-color: rgba(59, 130, 246, .5); }
+.oh-badge.done     { background: rgba(34, 197, 94, .2);   color: #86efac; border-color: rgba(34, 197, 94, .5); }
+.oh-badge.cancelled{ background: rgba(239, 68, 68, .2);   color: #fca5a5; border-color: rgba(239, 68, 68, .5); }
+.oh-badge.refund   { background: rgba(245, 158, 11, .22); color: #fcd34d; border-color: rgba(245, 158, 11, .55); }
+.oh-badge.refunded { background: rgba(148, 163, 184, .22);color: #e2e8f0; border-color: rgba(148, 163, 184, .55); }
+
+.oh-items { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--bg2); }
+.oh-items li {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 9px 0; border-bottom: 1px solid var(--bg2); font-size: .92rem;
+}
+.oh-items li span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.oh-items li span:last-child { white-space: nowrap; font-weight: 600; }
+.oh-total { display: flex; justify-content: space-between; padding: 12px 0 4px; font-weight: 800; }
+
+.oh-meta { display: grid; gap: 3px; margin: 12px 0 0; font-size: .88rem; }
+.oh-meta span { color: var(--muted); margin-right: 4px; }
+
+.oh-refund {
+  margin-top: 14px; padding: 12px 16px; border-radius: 12px; font-size: .9rem; line-height: 1.55;
+  background: rgba(255, 255, 255, .06); border: 1px solid var(--bg2);
+}
+.oh-refund b { display: block; margin-bottom: 6px; }
+.oh-refund span { color: var(--muted); margin-right: 4px; }
+.oh-refund.pending  { border-color: rgba(245, 158, 11, .6); }
+.oh-refund.approved { border-color: rgba(34, 197, 94, .6); }
+.oh-refund.rejected { border-color: rgba(239, 68, 68, .6); }
+
+.oh-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.oh-note { margin: 10px 0 0; color: var(--muted); font-size: .85rem; }
+
+.history-empty { padding: 28px 16px; text-align: center; color: var(--muted); }
+.history-more { display: block; margin: 8px auto 0; }
+.history-more[hidden] { display: none; }
+
+/* Вікно запиту на повернення */
+.rf-overlay {
+  position: fixed; inset: 0; z-index: 1000; padding: 20px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .65);
+}
+.rf-overlay[hidden] { display: none; }
+.rf-modal {
+  width: 100%; max-width: 460px; padding: 24px; box-sizing: border-box;
+  background: var(--card); border: 1px solid var(--accent); border-radius: var(--radius);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .55); color: #fff;
+}
+.rf-modal h3 { margin: 0 0 6px; font-size: 1.2rem; }
+.rf-sum { margin: 0 0 16px; color: var(--muted); }
+.rf-modal label { display: block; margin-bottom: 14px; font-size: .9rem; font-weight: 600; }
+.rf-modal select, .rf-modal textarea {
+  display: block; width: 100%; margin-top: 6px; padding: 10px 12px; box-sizing: border-box;
+  font: inherit; color: #fff; background: var(--bg2); border: 1px solid transparent; border-radius: 10px;
+}
+.rf-modal select:focus, .rf-modal textarea:focus { outline: none; border-color: var(--accent); }
+.rf-error {
+  margin: 0 0 12px; padding: 10px 14px; border-radius: 10px; font-size: .9rem;
+  background: rgba(239, 68, 68, .12); border: 1px solid #ef4444;
+}
+.rf-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+@media (max-width: 520px) {
+  .oh-date { margin-left: 0; width: 100%; }
+}

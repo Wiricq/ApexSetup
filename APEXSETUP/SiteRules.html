@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <link rel="stylesheet" href="css/theme.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила сайту, Умови використання та Конституція — Інтернет-магазин ПК-гаджетів</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #0f172a; /* Темний фон для виразного вигляду червоних плям */
+            --card-bg: rgba(30, 41, 59, 0.85); /* Напівпрозорі картки */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* М'які червоні плями на тлі */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 550px;
+            height: 550px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.35;
+        }
+
+        /* Верхній лівий червоний софіт/пляма */
+        body::before {
+            top: -100px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.8) 0%, rgba(220, 38, 38, 0) 70%);
+        }
+
+        /* Нижній правий червоний софіт/пляма */
+        body::after {
+            bottom: -100px;
+            right: -100px;
+            background: radial-gradient(circle, rgba(225, 29, 72, 0.8) 0%, rgba(159, 18, 57, 0) 70%);
+        }
+
+        /* Додаткова м'яка червона пляма посередині для блоку «Сетап мрії» */
+        .glow-spot {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(244, 63, 94, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header закріплений зверху */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .logo span {
+            color: #ef4444; /* Червоний акцент у логотипі */
+        }
+
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            position: relative;
+        }
+
+        @media (max-width: 900px) {
+            .page-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static !important;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Зміст закріплений при прокрутці */
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            align-self: start;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            border-bottom: 2px solid #ef4444;
+            padding-bottom: 8px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: color 0.2s, padding-left 0.2s;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            color: #ef4444;
+            padding-left: 5px;
+        }
+
+        /* Main Content */
+        .content {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .content h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .update-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        section {
+            margin-bottom: 40px;
+            scroll-margin-top: 100px;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            color: #f87171;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section h3 {
+            font-size: 1.15rem;
+            margin: 20px 0 10px 0;
+            color: var(--text-main);
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: #cbd5e1;
+        }
+
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+
+        strong {
+            color: var(--text-main);
+        }
+
+        /* Особливий виділений блок для Сетапу мрії з м'яким червоним підсвічуванням */
+        #dream-setup {
+            position: relative;
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+   <!-- Header закріплений зверху -->
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html"><h1>APEX<span>SETUP</span></h1></a>
+      <nav class="nav" id="nav">
+      </nav>
+    </div>
+  </header>
+
+    <div class="page-wrapper">
+        <!-- Бокова навігація (Зміст) -->
+        <aside class="sidebar">
+            <h3>Зміст</h3>
+            <ul>
+                <li><a href="#constitution">I. Конституція сайту</a></li>
+                <li><a href="#rules">II. Правила сайту</a></li>
+                <li><a href="#terms">III. Умови використання</a></li>
+                <li><a href="#dream-setup">IV. Вкладка «Сетап мрії»</a></li>
+                <li><a href="#delivery">V. Доставка та оплата</a></li>
+                <li><a href="#returns">VI. Гарантія та повернення</a></li>
+            </ul>
+        </aside>
+
+        <!-- Основний контент -->
+        <main class="content">
+            <h1>Правила сайту, Умови використання та Конституція</h1>
+            <span class="update-date">Останнє оновлення: Жовтень 2026 р.</span>
+
+            <!-- РОЗДІЛ І -->
+            <section id="constitution">
+                <h2>Розділ I. Конституція сайту</h2>
+                <p>Цей розділ визначає фундаментальні принципи роботи нашого магазину ПК-комплектуючих та гаджетів, права наших клієнтів та наші незмінні зобов'язання перед ними.</p>
+
+                <h3>Стаття 1. Місія та цінності</h3>
+                <p>Наша головна мета — забезпечити кожного геймера, творця контенту та ентузіаста надійними комплектуючими та передовими гаджетами за справедливою ціною. Ми будуємо довгострокові відносини на основі чесності та експертності.</p>
+
+                <h3>Стаття 2. Права Клієнта</h3>
+                <ul>
+                  <li><strong>Право на правдиву інформацію:</strong> Достовірні технічні характеристики, чесна наявність та актуальні ціни.</li>
+                  <li><strong>Право на якість:</strong> Усі товари проходять належну перевірку.</li>
+                </ul>
+
+                <h3>Стаття 3. Зобов'язання Магазину</h3>
+                <ul>
+                  <li>Оперативна обробка замовлень та якісна консультація у виборі заліза.</li>
+                  <li>Надійне та безпечне пакування крихких гаджетів та комплектуючих.</li>
+                  <li>Суворе дотримання конфіденційності персональних даних.</li>
+                </ul>
+            </section>
+
+            <!-- РОЗДІЛ ІІ -->
+            <section id="rules">
+                <h2>Розділ II. Правила сайту</h2>
+                <p>Правила поведінки та взаємодії користувачів із платформою інтернет-магазину.</p>
+
+                <h3>1. Акаунт та безпека</h3>
+                <ul>
+                  <li>Реєстрація на сайті дає переваги у вигляді відстеження замовлень та кешбеку/знижок (за наявності).</li>
+                  <li>Користувач несе відповідальність за безпеку свого пароля.</li>
+                  <li>Вказуйте реальні контактні дані для безперешкодної доставки вашого замовлення.</li>
+                </ul>
+
+                <h3>2. Відгуки та коментарі</h3>
+                <ul>
+                  <li>Ми заохочуємо залишати чесні відгуки про роботу магазину та придбані девайси.</li>
+                  <li>Заборонено спам, образи, нецензурну лексику та рекламні посилання у коментарях.</li>
+                </ul>
+
+                <h3>3. Технічні форс-мажори</h3>
+                <ul>
+                  <li>У разі технічної помилки у відображенні ціни товару, адміністрація зв'яжеться з покупцем для узгодження коректних умов або скасування замовлення із поверненням коштів.</li>
+                </ul>
+            </section>
+
+            <!-- РОЗДІЛ ІІІ -->
+            <section id="terms">
+                <h2>Розділ III. Умови використання (Публічна оферта)</h2>
+                <p>Оформлення замовлення на сайті означає вашу повну згоду з цими умовами та договором купівлі-продажу.</p>
+
+                <h3>1. Оформлення замовлення</h3>
+                <p>Замовлення можна створити через кошик сайту цілодобово. Після оформлення з вами зв'яжеться менеджер (або надійде автоматичне підтвердження).</p>
+
+                <h3>2. Ціни та оплата</h3>
+                <p>Всі розрахунки проводяться виключно в національній валюті (гривня).</p>
+                <ul>
+                  <li><strong>Оплата при отриманні:</strong> Накладений платіж (Нова Пошта / Укрпошта).</li>
+                  <li><strong>Онлайн-оплата:</strong> Карткою Visa / Mastercard безпосередньо на сайті.</li>
+                </ul>
+            </section>
+
+            <!-- РОЗДІЛ IV -->
+            <section id="dream-setup">
+                <div class="glow-spot" style="top: 20px; left: 20px;"></div>
+                <h2>Розділ IV. Послуга «Сетап мрії»</h2>
+                <p>Спеціальна інтерактивна вкладка на нашому сайті дозволяє кожному замовнику зібрати унікальний ігровий чи робочий простір під власні потреби.</p>
+
+                <h3>1. Як створити заявку на «Сетап мрії»?</h3>
+                <p>Перейшовши у відповідну вкладку, замовник повинен заповнити форму, вказавши такі параметри:</p>
+                <ul>
+                  <li><strong>Бюджет:</strong> Оберіть фінансові рамки для вашого майбутнього сетапу.</li>
+                  <li><strong>Бажаний колір:</strong> Визначте основну колірну гаму (наприклад, класичний чорний, білий мінімалізм, яскравий RGB-стиль тощо).</li>
+                  <li><strong>Фото референсу:</strong> Завантажте або прикріпіть фото сетапу, який вам подобається, щоб наші спеціалісти краще зрозуміли ваші естетичні вподобання.</li>
+                  <li><strong>Пріоритети:</strong> Вкажіть головні пріоритети до бажаного сетапу (наприклад, максимальна продуктивність у геймінгу, тиха робота системи, стрімінг, ексклюзивний дизайн периферичних пристроїв тощо).</li>
+                  <li><strong>Коментар (за бажанням):</strong> Напишіть будь-які додаткові побажання чи деталі, які ви хотіли б врахувати під час підбору комплектуючих.</li>
+                </ul>
+
+                <h3>2. Процес підтвердження та оплати</h3>
+                <ul>
+                  <li>Після заповнення всіх полів необхідно надіслати заявку на розгляд.</li>
+                  <li>Адміністратор перевіряє заявку та приймає її.</li>
+                  <li>Після успішного прийняття заявки адміністратором замовник повинен здійснити переказ коштів на оплату свого бажаного сетапу мрії.</li>
+                </ul>
+
+                <h3>3. Терміни збирання та відправки</h3>
+                <ul>
+                  <li>Протягом <strong>1 тижня</strong> після надходження коштів адміністратор зобов'язується повністю зібрати сетап, суворо враховуючи всі пріоритети, вподобання та колірну гаму, які обрав замовник.</li>
+                  <li>Після завершення збирання та тестування готовий комплект надійно пакується та відправляється замовнику.</li>
+                </ul>
+
+                <h3>4. Зв'язок із адміністратором та повернення коштів</h3>
+                <ul>
+                  <li>Якщо у замовника виникають будь-які запитання щодо процесу або він бажає звернутися щодо повернення коштів, він може напряму зв'язатися з адміністратором через контакти на сайті.</li>
+                  <li><strong>Повернення коштів:</strong> Якщо замовник бажає повернути кошти, йому необхідно врахувати, що обробка запиту на повернення та проведення виплати може тривати <strong>до 1 тижня (до 7 днів)</strong>. Повернення здійснюється згідно з умовами магазину та чинним законодавством України.</li>
+                </ul>
+            </section>
+
+            <!-- РОЗДІЛ V -->
+            <section id="delivery">
+                <h2>Розділ V. Доставка товарів</h2>
+                <p>Враховуючи специфіку комп'ютерних комплектуючих та гаджетів, ми ретельно ставимося до їх перевезення.</p>
+                
+                <h3>Основний перевізник — «Нова Пошта»</h3>
+                <ul>
+                  <li>Доставка у відділення, поштомат або кур'єром за адресою.</li>
+                  <li>Терміни відправки: 1–5 днів. Термін доставки по Україні: зазвичай 1–3 дні.</li>
+                </ul>
+
+                <h3>Альтернативний перевізник — «Укрпошта»</h3>
+                <ul>
+                  <li>Доставка у відділення (Укрпошта Стандарт / Експрес).</li>
+                  <li>Терміни доставки: від 3 до 7 днів залежно від регіону.</li>
+                </ul>
+
+                <p><strong>Увага при отриманні:</strong> Обов'язково оглядайте посилку на пошті у присутності працівника служби доставки на предмет цілісності упаковки та відсутності механічних пошкоджень товару!</p>
+            </section>
+
+            <!-- РОЗДІЛ VI -->
+            <section id="returns">
+                <h2>Розділ VI. Гарантія, обмін та повернення</h2>
+                <ul>
+                  <li>На усі товари поширюється гарантія.</li>
+                  <li>Ви можете повернути товар відповідно до встановлених законодавством України норм та правил магазину.</li>
+                  <li><strong>Терміни повернення коштів:</strong> У разі подачі заявки на повернення коштів за товар чи послугу, термін обробки запиту та виконання виплати може становити **до 1 тижня (до 7 днів)**. Для уточнення деталей зв'яжіться з адміністратором.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

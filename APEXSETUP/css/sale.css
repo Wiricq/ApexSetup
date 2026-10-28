@@ -1,0 +1,38 @@
+/* ===== Знижки в адмін-панелі ===== */
+.field-title { display: block; margin-bottom: 8px; color: var(--muted); font-size: .9rem; }
+
+/* Перемикач «Без знижки / Зі знижкою» */
+.sale-toggle {
+  display: inline-flex; padding: 4px; margin-bottom: 14px;
+  background: var(--bg2); border-radius: 999px;
+}
+.sale-toggle button {
+  border: none; background: transparent; color: #fff;
+  padding: 9px 22px; border-radius: 999px;
+  font: inherit; font-weight: 600; cursor: pointer;
+  transition: background .2s;
+}
+.sale-toggle button.active { background: var(--accent); }
+.sale-toggle button[data-sale="yes"].active { background: #e11d48; }
+
+/* Блок із відсотком */
+.sale-box {
+  margin-bottom: 14px; padding: 14px 16px;
+  border: 1px dashed #e11d48; border-radius: 12px;
+  background: rgba(225, 29, 72, .08);
+}
+.sale-box label { margin-bottom: 10px; }
+
+.sale-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.sale-chips button {
+  padding: 6px 14px; border-radius: 999px; cursor: pointer;
+  background: var(--bg2); color: #fff; font: inherit; font-weight: 600;
+  border: 1px solid transparent; transition: border-color .2s, background .2s;
+}
+.sale-chips button:hover { border-color: #e11d48; background: rgba(225, 29, 72, .2); }
+
+.sale-preview { min-height: 1.3em; font-weight: 700; color: #fda4af; }
+
+/* Ціна зі знижкою в таблиці адміна */
+.old-price { color: #9ca3af; font-weight: 400; }
+.admin-table small.sale-tag { color: #fda4af; font-weight: 700; }
